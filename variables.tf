@@ -4,12 +4,12 @@ variable "wait_for_certificate_issued" {
   description = "Whether to wait for the certificate to be issued by ACM (the certificate status changed from `Pending Validation` to `Issued`)"
 }
 
-variable "domain_name" {
+variable "domain_name_override" {
   type        = string
-  description = "A domain name for which the certificate should be issued"
-
+  description = "A domain name for which the certificate should be issued.  If this is not specified, domain name is taken from the Context."
+  default     = null
   validation {
-    condition     = ! can(regex("[A-Z]", var.domain_name))
+    condition     = !can(regex("[A-Z]", var.domain_name_override))
     error_message = "Domain name must be lower-case."
   }
 }
