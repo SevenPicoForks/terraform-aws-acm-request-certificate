@@ -8,7 +8,7 @@ module "zone" {
   parent_zone_name = var.parent_zone_name
   zone_name        = "$${name}.$${parent_zone_name}"
 
-  context = module.this.context
+  context = module.context.self
 }
 
 module "acm_request_certificate" {
@@ -21,5 +21,5 @@ module "acm_request_certificate" {
   process_domain_validation_options = var.process_domain_validation_options
   wait_for_certificate_issued       = var.wait_for_certificate_issued
 
-  context = module.this.context
+  context = module.context.self
 }
