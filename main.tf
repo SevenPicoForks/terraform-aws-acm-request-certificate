@@ -3,7 +3,7 @@ locals {
   process_domain_validation_options = local.enabled && var.process_domain_validation_options && var.validation_method == "DNS"
   domain_validation_options_set     = local.process_domain_validation_options ? aws_acm_certificate.default.0.domain_validation_options : toset([])
   public_enabled                    = var.certificate_authority_arn == null
-  private_enabled                   = ! local.public_enabled
+  private_enabled                   = !local.public_enabled
 
   domain_name = var.domain_name_override != null ? var.domain_name_override : module.context.domain_name
   all_domains = concat(
